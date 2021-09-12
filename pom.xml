@@ -112,6 +112,18 @@
             <version>1.0.0.20210823.beta</version>
         </dependency>
 
+        <!--<dependency>
+            <groupId>com.github.kahlkn</groupId>
+            <artifactId>misaka</artifactId>
+            <version>1.0.0.20191024.beta</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.kahlkn</groupId>
+            <artifactId>misaka-extend</artifactId>
+            <version>1.0.0.20210823.beta</version>
+        </dependency>-->
+
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>

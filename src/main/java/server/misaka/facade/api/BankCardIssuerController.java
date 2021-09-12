@@ -1,24 +1,15 @@
 package server.misaka.facade.api;
 
-import artoria.beans.BeanUtils;
-import artoria.common.Input;
-import artoria.common.PageResult;
 import artoria.common.Result;
-import artoria.util.PagingUtils;
-import server.misaka.persistence.entity.BankCardIssuer;
-import server.misaka.service.dto.BankCardIssuerDTO;
-import server.misaka.facade.vo.BankCardIssuerVO;
-import server.misaka.service.BankCardIssuerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import server.misaka.service.BankCardIssuerService;
 
-import java.util.ArrayList;
-import java.util.List;
+import static server.misaka.UrlMapping.BANK_CARD_ISSUER_INFO;
 
 /**
  * BankCardIssuerController.
@@ -32,11 +23,14 @@ public class BankCardIssuerController {
     @Autowired
     private BankCardIssuerService bankCardIssuerService;
 
-    /*@ResponseBody
-    @RequestMapping(value = "/hello", method = RequestMethod.POST)
-    public Result<Object> hello(@RequestBody BankCardIssuerVO bankCardIssuerVO) {
+    /**
+     * 根据 银行卡号 查询 银行卡发行商信息
+     */
+    @ResponseBody
+    @RequestMapping(value = BANK_CARD_ISSUER_INFO, method = RequestMethod.GET)
+    public Result<Object> issuerInfo(String bankCardNumber) {
 
-        return new Result<Object>("Hello, World! ");
-    }*/
+        return new Result<Object>(bankCardIssuerService.issuerInfo(bankCardNumber));
+    }
 
 }

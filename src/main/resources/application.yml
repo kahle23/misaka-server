@@ -43,3 +43,9 @@ logging:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+
+artoria:
+  exception:
+    enabled: true
+  logging:
+    print-access-log: true
