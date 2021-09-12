@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="server.misaka.persistence.mapper.BankCardIssuerMapper" >
+
+    <!-- **** (Start) This will be covered, please do not modify. **** -->
+    <resultMap id="BaseResultMap" type="server.misaka.persistence.entity.BankCardIssuer" >
+        <id column="id" property="id" />
+        <result column="bank_name" property="bankName" />
+        <result column="organization_code" property="organizationCode" />
+        <result column="bank_card_name" property="bankCardName" />
+        <result column="bank_card_type" property="bankCardType" />
+        <result column="bank_card_number_length" property="bankCardNumberLength" />
+        <result column="issuer_identification_number" property="issuerIdentificationNumber" />
+        <result column="remark" property="remark" />
+        <result column="creator_id" property="creatorId" />
+        <result column="create_time" property="createTime" />
+        <result column="updater_id" property="updaterId" />
+        <result column="update_time" property="updateTime" />
+        <result column="alive_flag" property="aliveFlag" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        `id`,
+        `bank_name`,
+        `organization_code`,
+        `bank_card_name`,
+        `bank_card_type`,
+        `bank_card_number_length`,
+        `issuer_identification_number`,
+        `remark`,
+        `creator_id`,
+        `create_time`,
+        `updater_id`,
+        `update_time`,
+        `alive_flag`
+    </sql>
+
+    <sql id="Base_Selective_Where" >
+        <if test="id != null and id != ''">and `id` = #{id}</if>
+        <if test="bankName != null and bankName != ''">and `bank_name` = #{bankName}</if>
+        <if test="organizationCode != null and organizationCode != ''">and `organization_code` = #{organizationCode}</if>
+        <if test="bankCardName != null and bankCardName != ''">and `bank_card_name` = #{bankCardName}</if>
+        <if test="bankCardType != null and bankCardType != ''">and `bank_card_type` = #{bankCardType}</if>
+        <if test="bankCardNumberLength != null and bankCardNumberLength != ''">and `bank_card_number_length` = #{bankCardNumberLength}</if>
+        <if test="issuerIdentificationNumber != null and issuerIdentificationNumber != ''">and `issuer_identification_number` = #{issuerIdentificationNumber}</if>
+        <if test="remark != null and remark != ''">and `remark` = #{remark}</if>
+        <if test="creatorId != null and creatorId != ''">and `creator_id` = #{creatorId}</if>
+        <if test="createTime != null">and `create_time` = #{createTime}</if>
+        <if test="updaterId != null and updaterId != ''">and `updater_id` = #{updaterId}</if>
+        <if test="updateTime != null">and `update_time` = #{updateTime}</if>
+        <if test="aliveFlag != null">and `alive_flag` = #{aliveFlag}</if>
+    </sql>
+
+    <insert id="insert" parameterType="server.misaka.persistence.entity.BankCardIssuer" >
+        insert into `t_bank_card_issuer` (
+            <include refid="Base_Column_List" />
+        )
+        values (
+            #{id},
+            #{bankName},
+            #{organizationCode},
+            #{bankCardName},
+            #{bankCardType},
+            #{bankCardNumberLength},
+            #{issuerIdentificationNumber},
+            #{remark},
+            #{creatorId},
+            #{createTime},
+            #{updaterId},
+            #{updateTime},
+            #{aliveFlag}
+        )
+    </insert>
+
+    <insert id="insertBatch" >
+        insert into `t_bank_card_issuer` (
+            <include refid="Base_Column_List" />
+        )
+        values
+        <foreach collection="recordList" index="index" item="item" separator="," >
+        (
+            #{item.id},
+            #{item.bankName},
+            #{item.organizationCode},
+            #{item.bankCardName},
+            #{item.bankCardType},
+            #{item.bankCardNumberLength},
+            #{item.issuerIdentificationNumber},
+            #{item.remark},
+            #{item.creatorId},
+            #{item.createTime},
+            #{item.updaterId},
+            #{item.updateTime},
+            #{item.aliveFlag}
+        )
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="server.misaka.persistence.entity.BankCardIssuer" >
+        insert into `t_bank_card_issuer`
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >`id`, </if>
+            <if test="bankName != null" >`bank_name`, </if>
+            <if test="organizationCode != null" >`organization_code`, </if>
+            <if test="bankCardName != null" >`bank_card_name`, </if>
+            <if test="bankCardType != null" >`bank_card_type`, </if>
+            <if test="bankCardNumberLength != null" >`bank_card_number_length`, </if>
+            <if test="issuerIdentificationNumber != null" >`issuer_identification_number`, </if>
+            <if test="remark != null" >`remark`, </if>
+            <if test="creatorId != null" >`creator_id`, </if>
+            <if test="createTime != null" >`create_time`, </if>
+            <if test="updaterId != null" >`updater_id`, </if>
+            <if test="updateTime != null" >`update_time`, </if>
+            <if test="aliveFlag != null" >`alive_flag`, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >#{id}, </if>
+            <if test="bankName != null" >#{bankName}, </if>
+            <if test="organizationCode != null" >#{organizationCode}, </if>
+            <if test="bankCardName != null" >#{bankCardName}, </if>
+            <if test="bankCardType != null" >#{bankCardType}, </if>
+            <if test="bankCardNumberLength != null" >#{bankCardNumberLength}, </if>
+            <if test="issuerIdentificationNumber != null" >#{issuerIdentificationNumber}, </if>
+            <if test="remark != null" >#{remark}, </if>
+            <if test="creatorId != null" >#{creatorId}, </if>
+            <if test="createTime != null" >#{createTime}, </if>
+            <if test="updaterId != null" >#{updaterId}, </if>
+            <if test="updateTime != null" >#{updateTime}, </if>
+            <if test="aliveFlag != null" >#{aliveFlag}, </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" >
+        update `t_bank_card_issuer`
+        set
+            `updater_id` = #{updaterId},
+            `update_time` = NOW(),
+            `alive_flag` = 0
+        where `alive_flag` = 1
+            and `id` = #{id}
+    </delete>
+
+    <delete id="deleteByPrimaryKeyList" >
+        update `t_bank_card_issuer`
+        set
+            `updater_id` = #{updaterId},
+            `update_time` = NOW(),
+            `alive_flag` = 0
+        where `alive_flag` = 1
+            and `id` in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+            </foreach>
+    </delete>
+
+    <delete id="deleteSelective" parameterType="server.misaka.persistence.entity.BankCardIssuer" >
+        update `t_bank_card_issuer`
+        set
+            `updater_id` = #{updaterId},
+            `update_time` = NOW(),
+            `alive_flag` = 0
+        where `alive_flag` = 1
+            <if test="id != null" >and `id` = #{id}</if>
+            <if test="bankName != null" >and `bank_name` = #{bankName}</if>
+            <if test="organizationCode != null" >and `organization_code` = #{organizationCode}</if>
+            <if test="bankCardName != null" >and `bank_card_name` = #{bankCardName}</if>
+            <if test="bankCardType != null" >and `bank_card_type` = #{bankCardType}</if>
+            <if test="bankCardNumberLength != null" >and `bank_card_number_length` = #{bankCardNumberLength}</if>
+            <if test="issuerIdentificationNumber != null" >and `issuer_identification_number` = #{issuerIdentificationNumber}</if>
+            <if test="remark != null" >and `remark` = #{remark}</if>
+            <if test="creatorId != null" >and `creator_id` = #{creatorId}</if>
+            <if test="createTime != null" >and `create_time` = #{createTime}</if>
+            <if test="updaterId != null" >and `updater_id` = #{updaterId}</if>
+            <if test="updateTime != null" >and `update_time` = #{updateTime}</if>
+            <if test="aliveFlag != null" >and `alive_flag` = #{aliveFlag}</if>
+    </delete>
+
+    <update id="updateByPrimaryKey" parameterType="server.misaka.persistence.entity.BankCardIssuer" >
+        update `t_bank_card_issuer`
+        set
+            `id` = #{id},
+            `bank_name` = #{bankName},
+            `organization_code` = #{organizationCode},
+            `bank_card_name` = #{bankCardName},
+            `bank_card_type` = #{bankCardType},
+            `bank_card_number_length` = #{bankCardNumberLength},
+            `issuer_identification_number` = #{issuerIdentificationNumber},
+            `remark` = #{remark},
+            `creator_id` = #{creatorId},
+            `create_time` = #{createTime},
+            `updater_id` = #{updaterId},
+            `update_time` = #{updateTime},
+            `alive_flag` = #{aliveFlag}
+        where `alive_flag` = 1
+            and `id` = #{id}
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="server.misaka.persistence.entity.BankCardIssuer" >
+        update `t_bank_card_issuer`
+        <set>
+            <if test="id != null" >`id` = #{id}, </if>
+            <if test="bankName != null" >`bank_name` = #{bankName}, </if>
+            <if test="organizationCode != null" >`organization_code` = #{organizationCode}, </if>
+            <if test="bankCardName != null" >`bank_card_name` = #{bankCardName}, </if>
+            <if test="bankCardType != null" >`bank_card_type` = #{bankCardType}, </if>
+            <if test="bankCardNumberLength != null" >`bank_card_number_length` = #{bankCardNumberLength}, </if>
+            <if test="issuerIdentificationNumber != null" >`issuer_identification_number` = #{issuerIdentificationNumber}, </if>
+            <if test="remark != null" >`remark` = #{remark}, </if>
+            <if test="creatorId != null" >`creator_id` = #{creatorId}, </if>
+            <if test="createTime != null" >`create_time` = #{createTime}, </if>
+            <if test="updaterId != null" >`updater_id` = #{updaterId}, </if>
+            <if test="updateTime != null" >`update_time` = #{updateTime}, </if>
+            <if test="aliveFlag != null" >`alive_flag` = #{aliveFlag}, </if>
+        </set>
+        where `alive_flag` = 1
+            and `id` = #{id}
+    </update>
+
+    <select id="countSelective" resultType="int" parameterType="server.misaka.persistence.entity.BankCardIssuer" >
+        select
+            count(0)
+        from `t_bank_card_issuer`
+        where `alive_flag` = 1
+            <include refid="Base_Selective_Where" />
+    </select>
+
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" >
+        select
+            <include refid="Base_Column_List" />
+        from `t_bank_card_issuer`
+        where `alive_flag` = 1
+            and `id` = #{id}
+    </select>
+
+    <select id="queryByPrimaryKeyList" resultMap="BaseResultMap" >
+        select
+            <include refid="Base_Column_List" />
+        from `t_bank_card_issuer`
+        where `alive_flag` = 1
+            and `id` in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+            </foreach>
+    </select>
+
+    <select id="findOne" resultMap="BaseResultMap" parameterType="server.misaka.persistence.entity.BankCardIssuer">
+        select
+            <include refid="Base_Column_List" />
+        from `t_bank_card_issuer`
+        where `alive_flag` = 1
+            <include refid="Base_Selective_Where" />
+        limit 1
+    </select>
+
+    <select id="querySelective" resultMap="BaseResultMap" parameterType="server.misaka.persistence.entity.BankCardIssuer">
+        select
+            <include refid="Base_Column_List" />
+        from `t_bank_card_issuer`
+        where `alive_flag` = 1
+            <include refid="Base_Selective_Where" />
+    </select>
+    <!-- **** (End) This will be covered, please do not modify. **** -->
+    <!-- Generated by artoria-extend in 2021-09-13T14:10:35.607+0800. -->
+
+</mapper>
