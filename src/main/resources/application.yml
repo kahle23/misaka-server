@@ -45,6 +45,8 @@ mybatis:
     map-underscore-to-camel-case: true
 
 artoria:
+  event:
+    enabled: true
   exception:
     enabled: true
   logging:

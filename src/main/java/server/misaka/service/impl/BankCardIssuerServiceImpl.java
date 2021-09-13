@@ -1,6 +1,9 @@
 package server.misaka.service.impl;
 
 import artoria.beans.BeanUtils;
+import artoria.event.EventHolder;
+import artoria.servlet.RequestUtils;
+import artoria.spring.RequestContextUtils;
 import artoria.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import server.misaka.persistence.entity.BankCardIssuer;
 import server.misaka.persistence.mapper.BankCardIssuerMapper;
 import server.misaka.service.BankCardIssuerService;
 import server.misaka.service.dto.BankCardIssuerDTO;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * BankCardIssuerServiceImpl.
@@ -25,6 +30,9 @@ public class BankCardIssuerServiceImpl implements BankCardIssuerService {
     @Override
     public BankCardIssuerDTO issuerInfo(String bankCardNumber) {
         if (StringUtils.isBlank(bankCardNumber)) { return null; }
+        // appId  appSecret
+        String appId = RequestContextUtils.getRequest().getHeader("appId");
+        EventHolder.alias().setDistinctId(appId);
         String iin = bankCardNumber.substring(0, 6);
         BankCardIssuer bankCardIssuer = bankCardIssuerMapper.findByIin(iin);
         if (bankCardIssuer == null) {

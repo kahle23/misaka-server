@@ -1,6 +1,7 @@
 package server.misaka.facade.api;
 
 import artoria.common.Result;
+import artoria.event.EventRecord;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class BankCardIssuerController {
      * 根据 银行卡号 查询 银行卡发行商信息
      */
     @ResponseBody
+    @EventRecord(code = "bank:card:issuer-info", input = true)
     @RequestMapping(value = BANK_CARD_ISSUER_INFO, method = RequestMethod.GET)
     public Result<Object> issuerInfo(String bankCardNumber) {
 

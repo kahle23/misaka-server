@@ -14,10 +14,14 @@ import server.misaka.service.EventRecordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import server.misaka.service.dto.EventRecordDTO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import static artoria.common.Constants.ONE;
+import static artoria.common.Constants.SYSTEM;
 import static artoria.common.Errors.PARAMETER_IS_REQUIRED;
 
 /**
@@ -31,5 +35,20 @@ public class EventRecordServiceImpl implements EventRecordService {
 
     @Autowired
     private EventRecordMapper eventRecordMapper;
+
+    @Override
+    public void add(EventRecordDTO eventRecordDTO) {
+        VerifyUtils.notNull(eventRecordDTO, PARAMETER_IS_REQUIRED);
+        Date nowDate = new Date();
+        EventRecord eventRecord =
+                BeanUtils.beanToBean(eventRecordDTO, EventRecord.class);
+        eventRecord.setCreatorId(SYSTEM);
+        eventRecord.setCreateTime(nowDate);
+        eventRecord.setUpdaterId(SYSTEM);
+        eventRecord.setUpdateTime(nowDate);
+        eventRecord.setAliveFlag(ONE);
+        int effect = eventRecordMapper.insertSelective(eventRecord);
+        VerifyUtils.isTrue(effect == ONE, "事件记录增加失败！");
+    }
 
 }
